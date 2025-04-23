@@ -3,12 +3,12 @@
 1. Initialize kubeadm on the master node
     ```
     ssh ubuntu@$(terraform output -raw master_ip_address)
-    sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-cert-extra-sans=<PUBLIC_IP>
+    sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-cert-extra-sans=<MASTER_PUBLIC_IP>
     ```
 2. Run commands printed in output to copy kubeconfig to `ubuntu` user's home directory. 
 3. Install Flannel
     ```
-    kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
+    kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
     ```
 4. SSH onto worker nodes and join worker them using join command printed in step 1.
     ```
